@@ -105,17 +105,17 @@
                                             <span class="path4"></span>
                                         </i>
                                     </span>
-                                    <span class="menu-title">Tools</span>
+                                    <span class="menu-title">Master</span>
                                     <span class="menu-arrow"></span>
                                 </span>
                                 <div class="menu-sub menu-sub-accordion">
                                     <div class="menu-item">
                                         <a class="menu-link active"
-                                            href="{{ url('generate-invoice/generate-from-excel') }}">
+                                            href="{{ route('user.index') }}">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                            <span class="menu-title">Invoice Generator</span>
+                                            <span class="menu-title">User</span>
                                         </a>
                                     </div>
                                 </div>
@@ -146,7 +146,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="kt_app_footer"
+                    {{-- <div id="kt_app_footer"
                         class="app-footer align-items-center justify-content-center justify-content-md-between flex-column flex-md-row py-3">
                         <div class="text-dark order-2 order-md-1">
                             <span class="text-muted fw-semibold me-1">2023&copy;</span>
@@ -154,9 +154,8 @@
                                 class="text-gray-800 text-hover-primary">Keenthemes</a>
                         </div>
                         <ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
-
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
