@@ -1,0 +1,54 @@
+@extends('template.components.index')
+
+@section('title', 'Pemeriksaan')
+
+@section('content')
+    <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+        <div class="card-header cursor-pointer">
+            <div class="card-title m-0">
+                <h3 class="fw-bold m-0">Daftar Pemeriksaan</h3>
+            </div>
+            <a href="{{route('examination.create')}}" class="btn btn-sm btn-danger align-self-center">
+                Tambah Data Pemeriksaan
+            </a>
+
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered border align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+                       id="kt_subscriptions_table">
+                    <thead>
+                    <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                        <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table"
+                            rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending"
+                            style="width: 223.094px;">No
+                        </th>
+                        <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table"
+                            rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending"
+                            style="width: 223.094px;">Nama
+                        </th>
+                        <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table"
+                            rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending"
+                            style="width: 223.094px;">Unit Price Terakhir
+                        </th>
+                        <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table"
+                            rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending"
+                            style="width: 223.094px;">Start Date
+                        </th>
+                        <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1"
+                            aria-label="Actions" style="width: 183.312px;">Aksi
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-gray-600 fw-semibold">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="row pt-3">
+                <div class="col d-flex justify-content-end">
+
+                </div>
+            </div>
+        </div>
+@endsection

@@ -20,6 +20,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{id}', [\App\Http\Controllers\MedicineController::class, 'show'])->name('medicine.show');
         Route::post('/sync', [\App\Http\Controllers\MedicineController::class, 'syncData'])->name('medicine.sync');
     });
+
+    Route::prefix('examination')->group(function () {
+        Route::get('/', [\App\Http\Controllers\ExaminationController::class, 'index'])->name('examination.index');
+        Route::get('/create', [\App\Http\Controllers\ExaminationController::class, 'create'])->name('examination.create');
+        Route::post('/', [\App\Http\Controllers\ExaminationController::class, 'store'])->name('examination.store');
+
+    });
 });
 
 require __DIR__ . '/auth.php';
