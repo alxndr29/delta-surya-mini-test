@@ -52,7 +52,8 @@
                             </div>
                         </div>
                         <div class="row mb-6">
-                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Tempat, Tanggal Lahir</label>
+                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Tempat, Tanggal
+                                Lahir</label>
                             <div class="col-lg-8">
                                 <div class="row">
                                     <div class="col-lg-6 fv-row fv-plugins-icon-container">
@@ -81,7 +82,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="card">
                     <div class="card-header cursor-pointer">
                         <div class="card-title m-0">
@@ -90,7 +90,8 @@
                     </div>
                     <div class="card-body">
                         <div class="row mb-6">
-                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Berat & Tinggi Badan</label>
+                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Berat & Tinggi
+                                Badan</label>
                             <div class="col-lg-8">
                                 <div class="row">
                                     <div class="col-lg-6 fv-row fv-plugins-icon-container">
@@ -165,9 +166,24 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <div class="row mb-6">
+                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Upload File Resep</label>
+                            <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                <input type="file" name="heart_rate"
+                                       class="form-control form-control-lg form-control-solid"
+                                       placeholder="Heart Rate" required>
+                            </div>
+                        </div>
+                        <div class="row mb-6">
+                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">
+                                Masukan jumlah obat yang
+                                diperlukan dibawah ini
+                            </label>
+                        </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered border align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
-                                   id="kt_subscriptions_table">
+                            <table
+                                class="table table-bordered border align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+                                id="kt_subscriptions_table">
                                 <thead>
                                 <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                                     <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table"
@@ -178,7 +194,6 @@
                                         rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending"
                                         style="width: 223.094px;">Nama
                                     </th>
-
                                     <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1"
                                         aria-label="Actions" style="width: 183.312px;"> Qty
                                     </th>
