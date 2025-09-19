@@ -103,11 +103,11 @@
 
 <script>
 
-    @if (session('login_error'))
+    @if (session('error'))
     Swal.fire({
         icon: 'error',
         title: 'Login Gagal',
-        text: '{{ session('login_error') }}',
+        text: '{{ session('error') }}',
         confirmButtonText: 'OK',
         backdrop: false
     });

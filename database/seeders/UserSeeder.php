@@ -49,6 +49,62 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('12345678'),
                 'role_id' => 3,
             ],
+            [
+                'id' => 6,
+                'name' => 'Apoteker C',
+                'email' => 'apoteker_c@email.com',
+                'password' => bcrypt('12345678'),
+                'role_id' => 3,
+            ],
+            [
+                'id' => 7,
+                'name' => 'Apoteker D',
+                'email' => 'apoteker_d@email.com',
+                'password' => bcrypt('12345678'),
+                'role_id' => 3,
+            ],
+            [
+                'id' => 8,
+                'name' => 'Apoteker E',
+                'email' => 'apoteker_e@email.com',
+                'password' => bcrypt('12345678'),
+                'role_id' => 3,
+            ],
+            [
+                'id' => 9,
+                'name' => 'Apoteker F',
+                'email' => 'apoteker_f@email.com',
+                'password' => bcrypt('12345678'),
+                'role_id' => 3,
+            ],
+            [
+                'id' => 10,
+                'name' => 'Apoteker G',
+                'email' => 'apoteker_g@email.com',
+                'password' => bcrypt('12345678'),
+                'role_id' => 3,
+            ],
+            [
+                'id' => 11,
+                'name' => 'Apoteker H',
+                'email' => 'apoteker_h@email.com',
+                'password' => bcrypt('12345678'),
+                'role_id' => 3,
+            ],
+            [
+                'id' => 12,
+                'name' => 'Apoteker I',
+                'email' => 'apoteker_i@email.com',
+                'password' => bcrypt('12345678'),
+                'role_id' => 3,
+            ],
+            [
+                'id' => 13,
+                'name' => 'Apoteker J',
+                'email' => 'apoteker_j@email.com',
+                'password' => bcrypt('12345678'),
+                'role_id' => 3,
+            ],
         ];
 
         DB::beginTransaction();

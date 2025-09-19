@@ -3,7 +3,7 @@
 
 <head>
     <base href="" />
-    <title>Kukurumart Admin</title>
+    <title>RS DELTA SURYA</title>
     <meta charset="utf-8" />
     <meta name="description" content="Saul HTML Free - Bootstrap 5 HTML Multipurpose Admin Dashboard Theme" />
     <meta name="keywords"
@@ -110,12 +110,21 @@
                                 </span>
                                 <div class="menu-sub menu-sub-accordion">
                                     <div class="menu-item">
-                                        <a class="menu-link active"
+                                        <a class="menu-link {{ request()->routeIs('user.*') ? 'active' : '' }}"
                                             href="{{ route('user.index') }}">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
                                             <span class="menu-title">User</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link {{ request()->routeIs('medicine.*') ? 'active' : '' }}"
+                                           href="{{ route('medicine.index') }}">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Obat</span>
                                         </a>
                                     </div>
                                 </div>
@@ -169,27 +178,29 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="{{ asset('plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('js/scripts.bundle.js') }}"></script>
+
     <script>
         var hostUrl = "assets/";
 
-        @if (session('swal_errors'))
+        @if (session('error'))
             setTimeout(() => {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Validasi Gagal',
-                    html: `{!! session('swal_errors') !!}`,
+                    title: 'Gagal',
+                    html: `{!! session('error') !!}`,
                     backdrop: false,
                 });
             }, 500);
         @endif
-        @if (session('swal_success'))
+        @if (session('success'))
             setTimeout(() => {
                 Swal.fire({
                     icon: 'success',
                     title: 'Berhasil',
-                    text: '{{ session('swal_success') }}',
+                    text: '{{ session('success') }}',
                     backdrop: false,
                 });
             }, 500);
