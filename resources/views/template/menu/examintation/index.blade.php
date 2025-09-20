@@ -61,7 +61,11 @@
                                 <div>{{ $value->phone }}</div>
                             </td>
                             <td>
-                                <div class="badge badge-light">{{$value->examination->status}}</div>
+                                @if($value->examination->status != 'done')
+                                    <div class="badge badge-warning">{{$value->examination->status}}</div>
+                                @else
+                                    <div class="badge badge-success">{{$value->examination->status}}</div>
+                                @endif
                             </td>
                             <td>
                                 <a href="{{ route('examination.edit', $value->id) }}"
