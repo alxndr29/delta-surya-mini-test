@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Mattiverse\Userstamps\Traits\Userstamps;
 
 class Patient extends Model
@@ -18,4 +20,9 @@ class Patient extends Model
         'nik',
         'bpjs'
     ];
+
+    public function examination(): HasOne
+    {
+        return $this->hasOne(Examination::class, 'patient_id', 'id');
+    }
 }

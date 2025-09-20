@@ -1,12 +1,23 @@
 @extends('template.components.index')
 
-@section('title', 'Data Pasien')
+@section('title', 'Detail Data Pasien')
 
 @section('content')
     <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
         <div class="card-body">
-            <form method="POST"  action="{{ route('examination.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('examination.update', $patients->id) }}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
+                @if($patients->examination->status == "process")
+                    <div class="alert alert-info" role="alert">
+                        Anda masih dapat mengubah resep jika masih belum di proses olek apoteker.
+                    </div>
+                @else
+                    <div class="alert alert-danger" role="alert">
+                        Anda tidak dapat mengubah resep karena sudah selesai di proses apoteker.
+                    </div>
+                @endif
+
                 <div class="card">
                     <div class="card-header cursor-pointer">
                         <div class="card-title m-0">
@@ -20,7 +31,7 @@
                                 <input type="text" name="date"
                                        class="form-control form-control-lg form-control-solid"
                                        placeholder="Tanggal Pemeriksaan" required
-                                       value="{{ old('date', date('Y-m-d')) }}">
+                                       value="{{$patients->examination->date}}" readonly>
                             </div>
                         </div>
                     </div>
@@ -40,13 +51,13 @@
                                         <input type="number" name="nik"
                                                class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
                                                placeholder="No. NIK" required
-                                               value="{{ old('nik') }}">
+                                               value="{{ $patients->nik }}" readonly>
                                     </div>
                                     <div class="col-lg-6 fv-row fv-plugins-icon-container">
                                         <input type="number" name="bpjs"
                                                class="form-control form-control-lg form-control-solid"
                                                placeholder="No. BPJS" required
-                                               value="{{ old('bpjs') }}">
+                                               value="{{ $patients->bpjs }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -57,7 +68,7 @@
                                 <input type="text" name="name"
                                        class="form-control form-control-lg form-control-solid"
                                        placeholder="Nama Lengkap" required
-                                       value="{{ old('name') }}">
+                                       value="{{ $patients->name }}" readonly>
                             </div>
                         </div>
                         <div class="row mb-6">
@@ -66,7 +77,7 @@
                                 <input type="number" name="phone"
                                        class="form-control form-control-lg form-control-solid"
                                        placeholder="No. Telepon" required
-                                       value="{{ old('phone') }}">
+                                       value="{{ $patients->phone }}" readonly>
                             </div>
                         </div>
                         <div class="row mb-6">
@@ -78,13 +89,13 @@
                                         <input type="text" name="bhirt_place"
                                                class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
                                                placeholder="Tempat lahir" required
-                                               value="{{ old('bhirt_place') }}">
+                                               value="{{ $patients->bhirt_place }}" readonly>
                                     </div>
                                     <div class="col-lg-6 fv-row fv-plugins-icon-container">
                                         <input type="date" name="bhirt_date"
                                                class="form-control form-control-lg form-control-solid"
                                                placeholder="Tanggal Lahir" required
-                                               value="{{ old('bhirt_date') }}">
+                                               value="{{  $patients->bhirt_date }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +106,7 @@
                                 <input type="text" name="address"
                                        class="form-control form-control-lg form-control-solid"
                                        placeholder="Alamat" required
-                                       value="{{ old('address') }}">
+                                       value="{{  $patients->address }}" readonly>
                             </div>
                         </div>
                     </div>
@@ -116,13 +127,13 @@
                                         <input type="number" name="weight"
                                                class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
                                                placeholder="Berat" required
-                                               value="{{ old('weight') }}">
+                                               value="{{ $patients->examination->weight }}">
                                     </div>
                                     <div class="col-lg-6 fv-row fv-plugins-icon-container">
                                         <input type="number" name="height"
                                                class="form-control form-control-lg form-control-solid"
                                                placeholder="Tinggi Badan" required
-                                               value="{{ old('height') }}">
+                                               value="{{ $patients->examination->height }}">
                                     </div>
                                 </div>
                             </div>
@@ -135,13 +146,13 @@
                                         <input type="number" name="systole"
                                                class="form-control form-control-lg form-control-solid"
                                                placeholder="Systole" required
-                                               value="{{ old('systole') }}">
+                                               value="{{ $patients->examination->systole }}">
                                     </div>
                                     <div class="col-lg-6 fv-row fv-plugins-icon-container">
                                         <input type="number" name="diastole"
                                                class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
                                                placeholder="Diastole" required
-                                               value="{{ old('diastole') }}">
+                                               value="{{$patients->examination->diastole}}">
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +163,7 @@
                                 <input type="number" name="respiratory_rate"
                                        class="form-control form-control-lg form-control-solid"
                                        placeholder="Respiration Rate" required
-                                       value="{{ old('respiratory_rate') }}">
+                                       value="{{ $patients->examination->respiratory_rate }}">
                             </div>
                         </div>
                         <div class="row mb-6">
@@ -161,7 +172,7 @@
                                 <input type="number" name="temperature"
                                        class="form-control form-control-lg form-control-solid"
                                        placeholder="Suhu Tubuh" required
-                                       value="{{ old('temperature') }}">
+                                       value="{{ $patients->examination->temperature }}">
                             </div>
                         </div>
                         <div class="row mb-6">
@@ -170,7 +181,7 @@
                                 <input type="number" name="heart_rate"
                                        class="form-control form-control-lg form-control-solid"
                                        placeholder="Heart Rate" required
-                                       value="{{ old('heart_rate') }}">
+                                       value="{{$patients->examination->heart_rate }}">
                             </div>
                         </div>
 
@@ -193,6 +204,18 @@
                                        accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx">
                             </div>
                         </div>
+                        @php
+                            $file = $patients->examination->file ?? null;
+                            $url = $file && $file->file_path
+                                ? \Illuminate\Support\Facades\Storage::disk('public')->url($file->file_path)
+                                : null;
+                        @endphp
+
+                        @if ($url)
+                            <a href="{{ $url }}" target="_blank" class="btn btn-sm btn-primary p-3">
+                                Lihat / Unduh ({{ $file->file_name }})
+                            </a>
+                        @endif
                         <div class="row mb-6">
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">
                                 Masukan jumlah obat yang
@@ -220,18 +243,15 @@
                                 </thead>
                                 <tbody class="text-gray-600 fw-semibold">
                                 @foreach ($medicines as $key => $value)
+
                                     <tr class="odd">
-                                        <td>
-                                            {{ $key + 1 }}
-                                        </td>
-                                        <td>
-                                            <div>{{ $value->name }}</div>
-                                        </td>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $value->name }}</td>
                                         <td class="text-end">
                                             <input type="number" name="quantities[{{ $value->id }}]"
                                                    class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                                   placeholder="0"
-                                                   value="{{ old('quantities.'.$value->id) }}">
+                                                   placeholder="0" min="0"
+                                                   value="{{ $prescriptions[$value->id] ?? 0 }}">
                                         </td>
                                     </tr>
                                 @endforeach
@@ -241,8 +261,7 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <button type="reset" class="btn btn-light btn-active-light-primary me-2">Reset Formulir</button>
-                    <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Simpan</button>
+                    <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Ubah</button>
                 </div>
                 <input type="hidden">
             </form>

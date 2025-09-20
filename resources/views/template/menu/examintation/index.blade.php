@@ -11,7 +11,6 @@
             <a href="{{route('examination.create')}}" class="btn btn-sm btn-danger align-self-center">
                 Tambah Data Pemeriksaan
             </a>
-
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -29,11 +28,15 @@
                         </th>
                         <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table"
                             rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending"
-                            style="width: 223.094px;">Unit Price Terakhir
+                            style="width: 223.094px;">Alamat
                         </th>
                         <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table"
                             rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending"
-                            style="width: 223.094px;">Start Date
+                            style="width: 223.094px;">Telepon
+                        </th>
+                        <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_subscriptions_table"
+                            rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending"
+                            style="width: 223.094px;">Status
                         </th>
                         <th class="text-end min-w-70px sorting_disabled" rowspan="1" colspan="1"
                             aria-label="Actions" style="width: 183.312px;">Aksi
@@ -41,7 +44,32 @@
                     </tr>
                     </thead>
                     <tbody class="text-gray-600 fw-semibold">
+                    @foreach ($patients as $key => $value)
+                        <tr class="odd">
+                            <td>
+                                {{ $key + 1 }}
+                            </td>
+                            <td>
+                                <div>{{ $value->name }}</div>
+                            </td>
+                            <td>
+                                <div>{{ $value->address }}</div>
+                            </td>
+                            <td>
+                                <div>{{ $value->phone }}</div>
+                            </td>
+                            <td>
+                                <div class="badge badge-light">{{$value->examination->status}}</div>
+                            </td>
+                            <td>
+                                <a href="{{ route('examination.edit', $value->id) }}"
+                                   class="btn btn-sm btn-primary align-self-center">
+                                    Detail
+                                </a>
+                            </td>
 
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

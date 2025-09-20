@@ -24,8 +24,10 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('examination')->group(function () {
         Route::get('/', [\App\Http\Controllers\ExaminationController::class, 'index'])->name('examination.index');
         Route::get('/create', [\App\Http\Controllers\ExaminationController::class, 'create'])->name('examination.create');
+        Route::get('/edit/{id}', [\App\Http\Controllers\ExaminationController::class, 'edit'])->name('examination.edit');
         Route::post('/', [\App\Http\Controllers\ExaminationController::class, 'store'])->name('examination.store');
-
+        Route::put('/{id}', [\App\Http\Controllers\ExaminationController::class, 'update'])
+            ->name('examination.update');
     });
 });
 
