@@ -5,19 +5,39 @@
 @section('content')
     <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
         <div class="card-body">
+            @if (\Illuminate\Support\Facades\Auth::user()->role->slug == "apoteker")
+                @if($patients->examination->status == "process")
+                    <form method="POST" action="{{ route('examination.payment', ['id' => $patients->examination->id]) }}">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="btn btn-danger mb-3" id="kt_account_profile_details_submit">
+                            Proses Pembayaran
+                        </button>
+                    </form>
+                @endif
+                @if($patients->examination->status == "done")
+                    <button type="submit" class="btn btn-success mb-3" id="kt_account_profile_details_submit">
+                        Cetak Resi
+                    </button>
+                @endif
+
+            @endif
+
             <form method="POST" action="{{ route('examination.update', $patients->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                @if($patients->examination->status == "process")
-                    <div class="alert alert-info" role="alert">
-                        Anda masih dapat mengubah resep jika masih belum di proses olek apoteker.
-                    </div>
-                @else
-                    <div class="alert alert-danger" role="alert">
-                        Anda tidak dapat mengubah resep karena sudah selesai di proses apoteker.
-                    </div>
-                @endif
 
+                @if (\Illuminate\Support\Facades\Auth::user()->role->slug == "dokter")
+                    @if($patients->examination->status == "process")
+                        <div class="alert alert-info" role="alert">
+                            Anda masih dapat mengubah resep jika masih belum di proses olek apoteker.
+                        </div>
+                    @else
+                        <div class="alert alert-danger" role="alert">
+                            Anda tidak dapat mengubah resep karena sudah selesai di proses apoteker.
+                        </div>
+                    @endif
+                @endif
                 <div class="card">
                     <div class="card-header cursor-pointer">
                         <div class="card-title m-0">
@@ -261,7 +281,11 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Ubah</button>
+                    @if (\Illuminate\Support\Facades\Auth::user()->role->slug == "dokter")
+                        <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Simpan
+                            Perubahan
+                        </button>
+                    @endif
                 </div>
                 <input type="hidden">
             </form>

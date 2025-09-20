@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Medicine;
 use App\Models\MedicinePrice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 
@@ -13,7 +14,8 @@ class MedicineController extends Controller
     //
     public function index(Request $request): View
     {
-        $medicine = Medicine::with('medicine_last_prices')->paginate(10);
+        $medicine = Medicine::with('medicine_last_prices')
+            ->paginate(10);
         return view('template.menu.medicine.index', compact('medicine'));
     }
 

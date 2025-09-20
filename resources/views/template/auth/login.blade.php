@@ -70,7 +70,7 @@
                         <div class="fv-row mb-10">
                             <label class="form-label fs-6 fw-bold text-dark">Email</label>
                             <input class="form-control form-control-lg form-control-solid" type="email"
-                                   name="email" autocomplete="off"/>
+                                   name="email" autocomplete="off"  value="{{ old('email') }}"/>
                         </div>
                         <div class="fv-row mb-10">
                             <div class="d-flex flex-stack mb-2">

@@ -22,7 +22,6 @@ class ExaminationController extends Controller
         $patients = Patient::with([
             'examination',
         ])->paginate(10);
-
         return view('template.menu.examintation.index', compact('patients'));
     }
 
@@ -37,24 +36,24 @@ class ExaminationController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'nik'               => ['required', 'digits:16'],
-                'bpjs'              => ['nullable', 'digits:13'],
-                'name'              => ['required', 'string', 'max:255'],
-                'phone'             => ['required', 'string', 'max:20'],
-                'bhirt_place'       => ['required', 'string', 'max:100'],
-                'bhirt_date'        => ['required', 'date'],
-                'address'           => ['required', 'string', 'max:500'],
-                'date'              => ['required', 'date'],
-                'weight'            => ['required', 'numeric', 'between:1,500'],
-                'height'            => ['required', 'numeric', 'between:30,250'],
-                'diastole'          => ['required', 'integer', 'between:40,130'],
-                'systole'           => ['required', 'integer', 'between:70,250', 'gt:diastole'],
-                'respiratory_rate'  => ['required', 'integer', 'between:8,40'],
-                'temperature'       => ['required', 'numeric', 'between:30,45'],
-                'heart_rate'        => ['required', 'integer', 'between:30,220'],
-                'quantities'        => ['required', 'array'],
-                'quantities.*'      => ['nullable', 'integer', 'min:0'],
-                'file'              => ['nullable', 'file', 'mimes:pdf,jpg,jpeg,png,doc,docx,xlsx,xls', 'max:2048'],
+                'nik' => ['required', 'digits:16'],
+                'bpjs' => ['nullable', 'digits:13'],
+                'name' => ['required', 'string', 'max:255'],
+                'phone' => ['required', 'string', 'max:20'],
+                'bhirt_place' => ['required', 'string', 'max:100'],
+                'bhirt_date' => ['required', 'date'],
+                'address' => ['required', 'string', 'max:500'],
+                'date' => ['required', 'date'],
+                'weight' => ['required', 'numeric', 'between:1,500'],
+                'height' => ['required', 'numeric', 'between:30,250'],
+                'diastole' => ['required', 'integer', 'between:40,130'],
+                'systole' => ['required', 'integer', 'between:70,250', 'gt:diastole'],
+                'respiratory_rate' => ['required', 'integer', 'between:8,40'],
+                'temperature' => ['required', 'numeric', 'between:30,45'],
+                'heart_rate' => ['required', 'integer', 'between:30,220'],
+                'quantities' => ['required', 'array'],
+                'quantities.*' => ['nullable', 'integer', 'min:0'],
+                'file' => ['nullable', 'file', 'mimes:pdf,jpg,jpeg,png,doc,docx,xlsx,xls', 'max:2048'],
             ]
         );
 
@@ -63,24 +62,24 @@ class ExaminationController extends Controller
         }
 
         $patient = Patient::findOrFail($id);
-        $patient->nik         = $request->nik;
-        $patient->bpjs        = $request->bpjs;
-        $patient->name        = $request->name;
-        $patient->phone       = $request->phone;
+        $patient->nik = $request->nik;
+        $patient->bpjs = $request->bpjs;
+        $patient->name = $request->name;
+        $patient->phone = $request->phone;
         $patient->bhirt_place = $request->bhirt_place;
-        $patient->bhirt_date  = $request->bhirt_date;
-        $patient->address     = $request->address;
+        $patient->bhirt_date = $request->bhirt_date;
+        $patient->address = $request->address;
         $patient->save();
 
         $examination = Examination::where('patient_id', $patient->id)->firstOrFail();
-        $examination->date              = $request->date;
-        $examination->weight            = $request->weight;
-        $examination->height            = $request->height;
-        $examination->diastole          = $request->diastole;
-        $examination->systole           = $request->systole;
-        $examination->respiratory_rate  = $request->respiratory_rate;
-        $examination->temperature       = $request->temperature;
-        $examination->heart_rate        = $request->heart_rate;
+        $examination->date = $request->date;
+        $examination->weight = $request->weight;
+        $examination->height = $request->height;
+        $examination->diastole = $request->diastole;
+        $examination->systole = $request->systole;
+        $examination->respiratory_rate = $request->respiratory_rate;
+        $examination->temperature = $request->temperature;
+        $examination->heart_rate = $request->heart_rate;
         $examination->save();
 
         MedicalPrescription::where('examination_id', $examination->id)->delete();
@@ -97,10 +96,10 @@ class ExaminationController extends Controller
 
                 if ($medicinePrice) {
                     MedicalPrescription::create([
-                        'examination_id'    => $examination->id,
+                        'examination_id' => $examination->id,
                         'medicine_price_id' => $medicinePrice->id,
-                        'qty'               => $qty,
-                        'total_price'       => $qty * $medicinePrice->unit_price,
+                        'qty' => $qty,
+                        'total_price' => $qty * $medicinePrice->unit_price,
                     ]);
                 }
             }
@@ -108,23 +107,24 @@ class ExaminationController extends Controller
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $folder   = 'uploads/examinations';
-            $filename = Str::uuid().'.'.$file->getClientOriginalExtension();
-            $path     = $file->storeAs($folder, $filename, 'public');
+            $folder = 'uploads/examinations';
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs($folder, $filename, 'public');
             if ($old = File::where('examination_id', $examination->id)->first()) {
                 Storage::disk('public')->delete($old->file_path);
                 $old->delete();
             }
             File::create([
                 'examination_id' => $examination->id,
-                'file_path'      => $path,
-                'file_name'      => $file->getClientOriginalName(),
-                'file_mime'      => $file->getClientMimeType(),
-                'file_size'      => $file->getSize(),
+                'file_path' => $path,
+                'file_name' => $file->getClientOriginalName(),
+                'file_mime' => $file->getClientMimeType(),
+                'file_size' => $file->getSize(),
             ]);
         }
         return redirect()->back()->with('success', 'Data berhasil diperbarui!');
     }
+
     public function store(Request $request)
     {
         $validator = Validator::make(
@@ -268,5 +268,13 @@ class ExaminationController extends Controller
                 'medicines',
                 'prescriptions')
         );
+    }
+
+    public function payment($id)
+    {
+        $examination = Examination::find($id);
+        $examination->status = "done";
+        $examination->save();
+        return redirect()->back()->with('success', 'Berhasil melakukan pembayaran!');
     }
 }

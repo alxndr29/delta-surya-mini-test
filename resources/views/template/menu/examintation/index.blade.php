@@ -8,9 +8,11 @@
             <div class="card-title m-0">
                 <h3 class="fw-bold m-0">Daftar Pemeriksaan</h3>
             </div>
-            <a href="{{route('examination.create')}}" class="btn btn-sm btn-danger align-self-center">
-                Tambah Data Pemeriksaan
-            </a>
+            @if (\Illuminate\Support\Facades\Auth::user()->role->slug == "dokter")
+                <a href="{{route('examination.create')}}" class="btn btn-sm btn-danger align-self-center">
+                    Tambah Data Pemeriksaan
+                </a>
+            @endif
         </div>
         <div class="card-body">
             <div class="table-responsive">

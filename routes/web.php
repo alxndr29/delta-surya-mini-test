@@ -12,22 +12,23 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
     Route::prefix('user')->group(function () {
-        Route::get('/', [UserController::class, 'index'])->name('user.index');
+        Route::get('/', [UserController::class, 'index'])->name('user.index')->middleware('role:admin');
     });
 
     Route::prefix('medicine')->group(function () {
-        Route::get('/', [\App\Http\Controllers\MedicineController::class, 'index'])->name('medicine.index');
-        Route::get('/{id}', [\App\Http\Controllers\MedicineController::class, 'show'])->name('medicine.show');
-        Route::post('/sync', [\App\Http\Controllers\MedicineController::class, 'syncData'])->name('medicine.sync');
+        Route::get('/', [\App\Http\Controllers\MedicineController::class, 'index'])->name('medicine.index')->middleware('role:admin');
+        Route::get('/{id}', [\App\Http\Controllers\MedicineController::class, 'show'])->name('medicine.show')->middleware('role:admin');
+        Route::post('/sync', [\App\Http\Controllers\MedicineController::class, 'syncData'])->name('medicine.sync')->middleware('role:admin');
     });
 
     Route::prefix('examination')->group(function () {
-        Route::get('/', [\App\Http\Controllers\ExaminationController::class, 'index'])->name('examination.index');
-        Route::get('/create', [\App\Http\Controllers\ExaminationController::class, 'create'])->name('examination.create');
-        Route::get('/edit/{id}', [\App\Http\Controllers\ExaminationController::class, 'edit'])->name('examination.edit');
-        Route::post('/', [\App\Http\Controllers\ExaminationController::class, 'store'])->name('examination.store');
-        Route::put('/{id}', [\App\Http\Controllers\ExaminationController::class, 'update'])
-            ->name('examination.update');
+        Route::get('/', [\App\Http\Controllers\ExaminationController::class, 'index'])->name('examination.index')->middleware('role:dokter,apoteker');
+        Route::get('/create', [\App\Http\Controllers\ExaminationController::class, 'create'])->name('examination.create')->middleware('role:dokter,apoteker');
+        Route::get('/edit/{id}', [\App\Http\Controllers\ExaminationController::class, 'edit'])->name('examination.edit')->middleware('role:dokter,apoteker');
+        Route::post('/', [\App\Http\Controllers\ExaminationController::class, 'store'])->name('examination.store')->middleware('role:dokter,apoteker');
+        Route::put('/{id}', [\App\Http\Controllers\ExaminationController::class, 'update'])->name('examination.update')->middleware('role:dokter,apoteker');
+        Route::put('/{id}/payment', [\App\Http\Controllers\ExaminationController::class, 'payment'])->name('examination.payment')->middleware('role:apoteker');
+
     });
 });
 

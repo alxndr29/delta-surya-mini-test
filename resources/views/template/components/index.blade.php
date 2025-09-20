@@ -17,12 +17,9 @@
     <link rel="canonical" href="https://preview.keenthemes.com/saul-html-free"/>
     <link rel="shortcut icon" href="assets/media/logos/favicon.ico"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
-
     <link href="{{ asset('plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('css/style.bundle.css') }}" rel="stylesheet" type="text/css"/>
-
     <style>
-
     </style>
 </head>
 
@@ -55,8 +52,8 @@
     <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
         <div id="kt_app_header" class="app-header d-flex flex-column flex-stack">
             <div class="d-flex align-items-center flex-stack flex-grow-1">
-                <div class="app-header-logo d-flex align-items-center flex-stack px-lg-11 mb-2"
-                     id="kt_app_header_logo">
+                {{-- Logo & Sidebar toggle --}}
+                <div class="app-header-logo d-flex align-items-center flex-stack px-lg-11 mb-2" id="kt_app_header_logo">
                     <div class="btn btn-icon btn-active-color-primary w-35px h-35px ms-3 me-2 d-flex d-lg-none"
                          id="kt_app_sidebar_mobile_toggle">
                         <i class="ki-duotone ki-abstract-14 fs-2">
@@ -64,7 +61,7 @@
                             <span class="path2"></span>
                         </i>
                     </div>
-                    <a href="{{url('/')}}" class="app-sidebar-logo">
+                    <a href="{{ url('/') }}" class="app-sidebar-logo">
                         <img alt="Logo" src="{{ asset('media/logo-rumah-sakit.png') }}"
                              class="h-30px theme-light-show"/>
                     </a>
@@ -81,9 +78,20 @@
                         </i>
                     </div>
                 </div>
+
+                {{-- Tombol logout di kanan --}}
+                <form action="{{ route('logout') }}" method="POST" class="me-20">
+                    @csrf
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        <i class="ki-duotone ki-logout fs-3 me-1"></i> Logout
+                    </button>
+                </form>
             </div>
+
             <div class="app-header-separator"></div>
         </div>
+
+
         <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
             <div id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true"
                  data-kt-drawer-name="app-sidebar" data-kt-drawer-activate="{default: true, lg: false}"
@@ -96,7 +104,8 @@
                     data-kt-scroll-wrappers="#kt_app_main" data-kt-scroll-offset="5px">
                     <div id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false"
                          class="flex-column-fluid menu menu-sub-indention menu-column menu-rounded menu-active-bg mb-7">
-                        <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                        @if (\Illuminate\Support\Facades\Auth::user()->role->slug == "dokter" || \Illuminate\Support\Facades\Auth::user()->role->slug == "apoteker")
+                            <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                                 <span class="menu-link">
                                     <span class="menu-icon">
                                         <i class="ki-duotone ki-element-11 fs-1">
@@ -109,20 +118,22 @@
                                     <span class="menu-title">Pemeriksaan</span>
                                     <span class="menu-arrow"></span>
                                 </span>
-                            <div class="menu-sub menu-sub-accordion">
-                                <div class="menu-item">
-                                    <a class="menu-link {{ request()->routeIs('examination.*') ? 'active' : '' }}"
-                                       href="{{ route('examination.index') }}">
+                                <div class="menu-sub menu-sub-accordion">
+                                    <div class="menu-item">
+                                        <a class="menu-link {{ request()->routeIs('examination.*') ? 'active' : '' }}"
+                                           href="{{ route('examination.index') }}">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                        <span class="menu-title">Input Data</span>
-                                    </a>
-                                </div>
+                                            <span class="menu-title">Input Data</span>
+                                        </a>
+                                    </div>
 
+                                </div>
                             </div>
-                        </div>
-                        <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                        @endif
+                        @if (\Illuminate\Support\Facades\Auth::user()->role->slug == "admin")
+                            <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                                 <span class="menu-link">
                                     <span class="menu-icon">
                                         <i class="ki-duotone ki-element-11 fs-1">
@@ -135,28 +146,28 @@
                                     <span class="menu-title">Master</span>
                                     <span class="menu-arrow"></span>
                                 </span>
-                            <div class="menu-sub menu-sub-accordion">
-                                <div class="menu-item">
-                                    <a class="menu-link {{ request()->routeIs('user.*') ? 'active' : '' }}"
-                                       href="{{ route('user.index') }}">
+                                <div class="menu-sub menu-sub-accordion">
+                                    <div class="menu-item">
+                                        <a class="menu-link {{ request()->routeIs('user.*') ? 'active' : '' }}"
+                                           href="{{ route('user.index') }}">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                        <span class="menu-title">User</span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link {{ request()->routeIs('medicine.*') ? 'active' : '' }}"
-                                       href="{{ route('medicine.index') }}">
+                                            <span class="menu-title">User</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link {{ request()->routeIs('medicine.*') ? 'active' : '' }}"
+                                           href="{{ route('medicine.index') }}">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                        <span class="menu-title">Obat</span>
-                                    </a>
+                                            <span class="menu-title">Obat</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
+                        @endif
                     </div>
                 </div>
             </div>
