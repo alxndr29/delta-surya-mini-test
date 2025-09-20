@@ -92,30 +92,12 @@ git clone https://github.com/alxndr29/delta-surya-mini-test.git
 cd delta-surya-mini-test
 ```
 
-3. Install the dependencies.
-
-```bash
-composer install
-```
-
-4. Copy file `.env.example` to `.env` and configure database settings, payment gateway settings, and any other configurations you need.
+3. Copy file `.env.example` to `.env` and configure database settings, payment gateway settings, and any other configurations you need.
 
 ```bash
 cp .env.example .env
 ```
-
-5. Generate application key using this command.
-
-```bash
-php artisan key:generate
-```
-
-6. Running migration and seeder for initial data.
-
-```bash
-php artisan migrate --seed
-```
-7. Setup .env
+4. Setup .env
 ```bash
 APP_URL=http://localhost:8000
 
@@ -130,6 +112,25 @@ API_URL=http://recruitment.rsdeltasurya.com/api/v1/
 API_AUTH_EMAIL=xxxx@gmail.com
 API_AUTH_PASSWORD=xxxx
 ```
+
+5. Install the dependencies.
+
+```bash
+composer install
+```
+
+6. Generate application key using this command.
+
+```bash
+php artisan key:generate
+```
+
+7. Running migration and seeder for initial data.
+
+```bash
+php artisan migrate --seed
+```
+
 ## Running Development (Laravel)
 
 How to run the development server.
