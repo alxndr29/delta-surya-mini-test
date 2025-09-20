@@ -8,6 +8,7 @@ use App\Models\MedicalPrescription;
 use App\Models\Medicine;
 use App\Models\MedicinePrice;
 use App\Models\Patient;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -248,11 +249,11 @@ class ExaminationController extends Controller
         return redirect()->back()->with('success', 'Berhasil menambahkan data!');
     }
 
-    public function edit($id): View
+    public function edit($id)
     {
         $patients = Patient::with('examination',
             'examination.file',
-            'examination.medical_prescriptions.medicine_price')
+            'examination.medical_prescriptions.medicine_price.medicine')
             ->findOrFail($id);
 
         $medicines = Medicine::all();
@@ -276,5 +277,17 @@ class ExaminationController extends Controller
         $examination->status = "done";
         $examination->save();
         return redirect()->back()->with('success', 'Berhasil melakukan pembayaran!');
+    }
+
+    public function printReceipt($id)
+    {
+        $patient = Patient::with([
+            'examination',
+            'examination.file',
+            'examination.medical_prescriptions.medicine_price.medicine'
+        ])->findOrFail($id);
+        return Pdf::loadView('pdf.receipt', ['patient' => $patient])
+            ->setPaper('A4', 'portrait')
+            ->stream('resi-obat-' . $patient->id . '.pdf');
     }
 }

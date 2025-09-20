@@ -16,9 +16,11 @@
                     </form>
                 @endif
                 @if($patients->examination->status == "done")
-                    <button type="submit" class="btn btn-success mb-3" id="kt_account_profile_details_submit">
-                        Cetak Resi
-                    </button>
+                        <a href="{{ route('examination.receipt', $patients->id) }}"
+                           target="_blank"
+                           class="btn btn-success mb-3">
+                            Cetak Resi
+                        </a>
                 @endif
 
             @endif

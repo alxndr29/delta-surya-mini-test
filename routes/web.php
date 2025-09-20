@@ -28,6 +28,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/', [\App\Http\Controllers\ExaminationController::class, 'store'])->name('examination.store')->middleware('role:dokter,apoteker');
         Route::put('/{id}', [\App\Http\Controllers\ExaminationController::class, 'update'])->name('examination.update')->middleware('role:dokter,apoteker');
         Route::put('/{id}/payment', [\App\Http\Controllers\ExaminationController::class, 'payment'])->name('examination.payment')->middleware('role:apoteker');
+        Route::get('/patients/{id}/receipt', [\App\Http\Controllers\ExaminationController::class, 'printReceipt'])
+            ->name('examination.receipt')->middleware('role:apoteker');
 
     });
 });
