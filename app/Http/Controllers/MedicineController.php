@@ -103,11 +103,12 @@ class MedicineController extends Controller
                                 );
                             }
 
-                            return back()->with('success', 'Berhasil sinkronisasi data obat!');
+
                         }
 
-                        return back()->with('error', 'Gagal mendapatkan data harga obat!');
+
                     }
+                    return back()->with('success', 'Berhasil sinkronisasi data obat!');
                 } else {
                     return back()->with('error', 'Gagal mendapatkan data obat!');
                 }
