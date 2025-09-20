@@ -148,4 +148,6 @@ localhost:8000
 ```bash
 email   : admin@email.com
 password: 12345678
+
+all password from master users is 12345678
 ```
