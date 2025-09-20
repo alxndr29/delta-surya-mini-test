@@ -14,6 +14,9 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('user.index')->middleware('role:admin');
     });
+    Route::prefix('log')->group(function () {
+        Route::get('/', [\App\Http\Controllers\LogActivityController::class, 'index'])->name('log.index')->middleware('role:admin');
+    });
 
     Route::prefix('medicine')->group(function () {
         Route::get('/', [\App\Http\Controllers\MedicineController::class, 'index'])->name('medicine.index')->middleware('role:admin');

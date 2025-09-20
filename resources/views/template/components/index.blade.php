@@ -167,6 +167,31 @@
                                     </div>
                                 </div>
                             </div>
+                                <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                                <span class="menu-link">
+                                    <span class="menu-icon">
+                                        <i class="ki-duotone ki-element-11 fs-1">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                            <span class="path3"></span>
+                                            <span class="path4"></span>
+                                        </i>
+                                    </span>
+                                    <span class="menu-title">Log</span>
+                                    <span class="menu-arrow"></span>
+                                </span>
+                                    <div class="menu-sub menu-sub-accordion">
+                                        <div class="menu-item">
+                                            <a class="menu-link {{ request()->routeIs('log.*') ? 'active' : '' }}"
+                                               href="{{ route('log.index') }}">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                                <span class="menu-title">Log Aktivitas User</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                         @endif
                     </div>
                 </div>
