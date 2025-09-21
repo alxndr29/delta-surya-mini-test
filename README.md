@@ -97,6 +97,7 @@ cd delta-surya-mini-test
 ```bash
 cp .env.example .env
 ```
+
 4. Setup .env
 ```bash
 APP_URL=http://localhost:8000
@@ -129,6 +130,10 @@ php artisan key:generate
 
 ```bash
 php artisan migrate --seed
+```
+8. Make storage link
+```bash
+php artisan storage:link
 ```
 
 ## Running Development (Laravel)
